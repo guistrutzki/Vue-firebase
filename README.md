@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+>https://ninja-smoothies-udemy.firebaseapp.com/#/
+
 ## Build Setup
 
 ``` bash
