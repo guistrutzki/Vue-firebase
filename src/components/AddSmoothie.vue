@@ -6,9 +6,10 @@
           <label for="title">Smoothie Title</label>
           <input type="text" name="title" v-model="title" id="title">
         </div>
-        <div v-for="(ing, index) in ingredients" :key="index">
+        <div v-for="(ing, index) in ingredients" :key="index" class="field">
           <label for="ingredient">Ingredient</label>
           <input type="text" name="ingredient" id="ingredient" v-model="ingredients[index]">
+          <i class="material-icons delete" @click="deleteIng(ing)">delete</i>
         </div>
         <div class="field add-ingredient">
           <label for="add-ingredient">Add an ingredient</label>
@@ -27,7 +28,7 @@
   import slugify from 'slugify'
   export default {
     name: "AddSmoothie",
-    data(){
+    data() {
       return {
         title: null,
         another: null,
@@ -37,8 +38,8 @@
       }
     },
     methods: {
-      AddSmoothie(){
-        if(this.title){
+      AddSmoothie() {
+        if (this.title) {
           this.feedback = null
           //create a slug
           this.slug = slugify(this.title, {
@@ -51,23 +52,28 @@
             title: this.title,
             ingredients: this.ingredients,
             slug: this.slug
-          }).then( ()=>{
-            this.$router.push({ name: 'Index'})
-          }).catch( err => {
+          }).then(() => {
+            this.$router.push({name: 'Index'})
+          }).catch(err => {
             console.log(err)
           })
-        }else{
+        } else {
           this.feedback = 'You must enter a smoothie title'
         }
       },
-      addIng(){
-        if(this.another){
+      addIng() {
+        if (this.another) {
           this.ingredients.push(this.another)
           this.another = null
           this.feedback = null
-        }else{
+        } else {
           this.feedback = "You must enter a value to add an ingredient"
         }
+      },
+      deleteIng(ing) {
+        this.ingredients = this.ingredients.filter(ingredient =>{
+          return ingredient != ing
+        })
       }
     }
   }
@@ -84,6 +90,16 @@
     margin: 20px auto;
   }
   .add-smoothie .field{
+    position: relative;
     margin: 20px auto;
+  }
+  .add-smoothie .delete{
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+    color: #aaa;
+    font-size: 1.4em;
+    cursor: pointer;
+
   }
 </style>
