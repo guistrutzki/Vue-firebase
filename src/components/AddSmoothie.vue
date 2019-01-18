@@ -79,7 +79,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .add-smoothie{
     margin-top: 60px;
     padding: 20px;
@@ -100,6 +100,5 @@
     color: #aaa;
     font-size: 1.4em;
     cursor: pointer;
-
   }
 </style>
